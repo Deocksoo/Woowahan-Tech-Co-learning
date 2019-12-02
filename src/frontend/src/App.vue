@@ -2,27 +2,28 @@
   <v-app>
     <v-card class="overflow-hidden">
       <v-app-bar
+        :shrink-on-scroll="isInMainView"
+        :prominent="isInMainView"
+        :fade-img-on-scroll="isInMainView"
         absolute
         color="#6A76AB"
         dark
-        :shrink-on-scroll="isInMainView"
-        :prominent="isInMainView"
         src="./assets/bg.jpg"
-        :fade-img-on-scroll="isInMainView"
         scroll-target="#scrolling-techniques-3"
       >
         <template v-slot:img="{ props }">
-          <v-img v-if="isInMainView"
-                 v-bind="props"
-                 gradient="to top right, rgba(100,115,201,.7), rgba(25,32,72,.7)"
-          ></v-img>
+          <v-img
+            v-if="isInMainView"
+            v-bind="props"
+            gradient="to top right, rgba(100,115,201,.7), rgba(25,32,72,.7)"
+          />
         </template>
 
-        <v-app-bar-nav-icon></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon/>
 
         <v-toolbar-title>테코러닝</v-toolbar-title>
 
-        <v-spacer></v-spacer>
+        <v-spacer/>
 
         <v-btn icon>
           <v-icon>mdi-magnify</v-icon>
@@ -50,7 +51,7 @@
       >
         <v-container :style="getMainSheetStyle">
           <v-row>
-            <component :is="view"></component>
+            <component :is="view" />
           </v-row>
         </v-container>
       </v-sheet>
@@ -80,7 +81,7 @@
         icon
         @click="changeView(`FinishedStudy`)"
       >
-        <span>완료한 스터디</span>
+        <span>완료됨</span>
         <v-icon>mdi-check</v-icon>
       </v-btn>
 
@@ -96,6 +97,8 @@
 </template>
 
 <script>
+  `use strict`;
+
   import StudyRecruitment from "./components/study/StudyRecruitment";
   import OngoingStudy from "./components/study/OngoingStudy";
   import FinishedStudy from "./components/study/FinishedStudy";
@@ -134,10 +137,13 @@
       },
       getMainSheetStyle() {
         const marginTop = parseInt(this.sheetMarginTop);
+        const marginBottom = parseInt(this.sheetMarginBottom);
+
         const minHeight = window.screen.height - marginTop - parseInt(this.sheetMarginBottom);
 
         return `min-height: ${String(minHeight)}px;
-                margin-top: ${String(marginTop)}px;`
+                margin-top: ${String(marginTop)}px;
+                margin-bottom: ${String(marginBottom)}px;`
       },
     },
     mounted() {
