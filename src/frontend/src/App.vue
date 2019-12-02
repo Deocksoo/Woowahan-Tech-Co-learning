@@ -71,7 +71,7 @@
 
       <v-btn
         icon
-        @click="changeView(`OngoingStudy`)"
+        @click="changeView(`StudyOngoing`)"
       >
         <span>진행중</span>
         <v-icon>mdi-airplane-takeoff</v-icon>
@@ -79,7 +79,7 @@
 
       <v-btn
         icon
-        @click="changeView(`FinishedStudy`)"
+        @click="changeView(`StudyFinished`)"
       >
         <span>완료됨</span>
         <v-icon>mdi-check</v-icon>
@@ -100,18 +100,17 @@
   `use strict`;
 
   import StudyRecruitment from "./components/study/StudyRecruitment";
-  import OngoingStudy from "./components/study/OngoingStudy";
-  import FinishedStudy from "./components/study/FinishedStudy";
+  import StudyOngoing from "./components/study/StudyOngoing";
+  import StudyFinished from "./components/study/StudyFinished";
   import MyPage from "./components/user/MyPage";
   import ParticipatingStudy from "./components/user/ParticipatingStudy";
 
   export default {
-    name: 'App',
+    name: `App`,
     components: {
-      StudyGeneration,
       StudyRecruitment,
-      OngoingStudy,
-      FinishedStudy,
+      StudyOngoing,
+      StudyFinished,
       MyPage,
       ParticipatingStudy,
     },
@@ -120,6 +119,7 @@
         view: `StudyRecruitment`,
         sheetMarginTop: `0px`,
         sheetMarginBottom: `0px`,
+        loginId: 1,
       }
     },
     methods: {
