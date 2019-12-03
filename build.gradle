@@ -8,7 +8,9 @@ plugins {
 apply plugin: 'com.moowork.node'
 
 node {
+    workDir = file("./src/frontend")
     npmWorkDir = file("./src/frontend")
+    nodeModulesDir = file("./src/frontend")
 }
 
 group = 'woowahan.anifarm'
