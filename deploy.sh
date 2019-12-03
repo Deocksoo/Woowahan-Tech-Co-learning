@@ -1,1 +1,1 @@
-sh $WORKSPACE/gradlew build --debug
+sh $WORKSPACE/gradlew build
