@@ -1,0 +1,1 @@
+sh $WORKSPACE/gradlew build
