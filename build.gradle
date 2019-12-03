@@ -1,7 +1,14 @@
- plugins {
+plugins {
     id 'org.springframework.boot' version '2.2.1.RELEASE'
     id 'io.spring.dependency-management' version '1.0.8.RELEASE'
     id 'java'
+    id "com.moowork.node" version "0.10"
+}
+
+apply plugin: 'com.moowork.node'
+
+node {
+    workDir = file("./src/frontend")
 }
 
 group = 'woowahan.anifarm'
@@ -28,26 +35,33 @@ dependencies {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
 }
+//
+//task buildFrontEnd2(type: Exec) {
+//    workingDir "./src/frontend"
+//    if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
+//        commandLine 'npm.cmd', 'install'
+//        commandLine 'npm.cmd', 'run', 'build'
+//    } else {
+//        def proc = 'npm install'.execute()
+//        proc.in.eachLine { line -> println line }
+//        proc.err.eachLine { line -> println 'ERROR: ' + line }
+//        proc.waitFor()
+//        if (proc.exitValue() != 0) {
+//            throw new RuntimeException('NPM dependency installation failed!')
+//        }
+//        commandLine 'npm', 'run', 'build'
+//    }
+//}
 
- task buildFrontEnd(type: Exec) {
-     workingDir "./src/frontend"
-     if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
-         commandLine 'npm.cmd', 'install'
-         commandLine 'npm.cmd', 'run', 'build'
-     } else {
-         def proc = 'npm install'.execute()
-         proc.in.eachLine { line -> println line}
-         proc.err.eachLine { line -> println 'ERROR: '+line }
-         proc.waitFor()
-         if (proc.exitValue()!=0){
-             throw new RuntimeException('NPM dependency installation failed!')
-         }
-         commandLine 'npm', 'run', 'build'
-     }
- }
+task buildFrontEnd(type: NpmTask) {
+    description = "Install Node.js packages"
+    args = ['install']
+    inputs.files file('package.json')
+    outputs.files file('node_modules')
+}
 
- processResources.dependsOn 'buildFrontEnd'
+processResources.dependsOn 'buildFrontEnd'
 
- test {
+test {
     useJUnitPlatform()
 }
