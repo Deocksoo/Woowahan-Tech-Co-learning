@@ -62,32 +62,32 @@
       grow
     >
       <v-btn
-        icon
         @click="changeView(`StudyRecruitment`)"
+        icon
       >
         <span>모집중</span>
         <v-icon>mdi-account-group</v-icon>
       </v-btn>
 
       <v-btn
-        icon
         @click="changeView(`StudyOngoing`)"
+        icon
       >
         <span>진행중</span>
         <v-icon>mdi-airplane-takeoff</v-icon>
       </v-btn>
 
       <v-btn
-        icon
         @click="changeView(`StudyFinished`)"
+        icon
       >
         <span>완료됨</span>
         <v-icon>mdi-check</v-icon>
       </v-btn>
 
       <v-btn
-        icon
         @click="changeView(`MyPage`)"
+        icon
       >
         <span>프로필</span>
         <v-icon>mdi-account</v-icon>
@@ -138,8 +138,7 @@
       getMainSheetStyle() {
         const marginTop = parseInt(this.sheetMarginTop);
         const marginBottom = parseInt(this.sheetMarginBottom);
-
-        const minHeight = window.screen.height - marginTop - parseInt(this.sheetMarginBottom);
+        const minHeight = window.screen.height - marginTop - marginBottom;
 
         return `min-height: ${String(minHeight)}px;
                 margin-top: ${String(marginTop)}px;
@@ -151,9 +150,7 @@
     },
     updated() {
       this.resetSheetMargin();
-    }
+    },
   };
 </script>
 
-<style>
-</style>
