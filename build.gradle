@@ -35,6 +35,7 @@ dependencies {
          commandLine 'npm.cmd', 'install'
          commandLine 'npm.cmd', 'run', 'build'
      } else {
+         commandLine 'npm', 'update'
          commandLine 'npm', 'install'
          commandLine 'npm', 'run', 'build'
      }
