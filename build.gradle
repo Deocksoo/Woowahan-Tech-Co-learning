@@ -10,6 +10,8 @@ apply plugin: 'com.moowork.node'
 node {
     version = '12.13.1'
     npmVersion = '6.12.1'
+    distBaseUrl = 'https://nodejs.org/dist'
+    download = true
     workDir = file("./src/frontend")
     npmWorkDir = file("./src/frontend")
     nodeModulesDir = file("./src/frontend")
@@ -37,23 +39,6 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-    }
-}
-//
-task buildFrontEnd2(type: Exec) {
-    workingDir "./src/frontend"
-    if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
-        commandLine 'npm.cmd', 'install'
-        commandLine 'npm.cmd', 'run', 'build'
-    } else {
-        def proc = 'npm install'.execute()
-        proc.in.eachLine { line -> println line }
-        proc.err.eachLine { line -> println 'ERROR: ' + line }
-        proc.waitFor()
-        if (proc.exitValue() != 0) {
-            throw new RuntimeException('NPM dependency installation failed!')
-        }
-        commandLine 'npm', 'run', 'build'
     }
 }
 
