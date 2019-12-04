@@ -73,7 +73,7 @@
         @click="changeView(`StudyOngoing`)"
         icon
       >
-        <span>진행중</span>
+        <span>이히힣</span>
         <v-icon>mdi-airplane-takeoff</v-icon>
       </v-btn>
 
